@@ -8,7 +8,7 @@ plugins {
 }
 
 version = "0.1"
-group = "com.binarywizardsguild"
+group = "com.rangerforce"
 
 val kotlinVersion=project.properties.get("kotlinVersion")
 repositories {
@@ -35,7 +35,7 @@ dependencies {
 
 
 application {
-    mainClass = "com.binarywizardsguild.ApplicationKt"
+    mainClass = "com.rangerforce.ApplicationKt"
 }
 java {
     sourceCompatibility = JavaVersion.toVersion("21")
@@ -48,7 +48,7 @@ micronaut {
     testRuntime("kotest5")
     processing {
         incremental(true)
-        annotations("com.binarywizardsguild.*")
+        annotations("com.rangerforce.*")
     }
     aot {
     // Please review carefully the optimizations enabled below

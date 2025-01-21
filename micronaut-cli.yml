@@ -1,5 +1,5 @@
 applicationType: default
-defaultPackage: com.binarywizardsguild
+defaultPackage: com.rangerforce
 testFramework: kotest
 sourceLanguage: kotlin
 buildTool: gradle_kotlin
