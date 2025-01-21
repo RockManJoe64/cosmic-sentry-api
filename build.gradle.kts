@@ -11,6 +11,8 @@ version = "0.1"
 group = "com.rangerforce"
 
 val kotlinVersion=project.properties.get("kotlinVersion")
+val dotenvVersion=project.properties.get("dotenvVersion")
+
 repositories {
     mavenCentral()
 }
@@ -27,6 +29,7 @@ dependencies {
     implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
+    implementation("io.github.cdimascio:dotenv-kotlin:${dotenvVersion}")
     compileOnly("io.micronaut:micronaut-http-client")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")

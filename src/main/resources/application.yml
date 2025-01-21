@@ -14,4 +14,8 @@ graphql:
   graphiql: # enables the /graphiql endpoint to test calls against your graph.
     enabled: true
 redis:
-  uri: redis\://localhost
+  uri: "redis://${REDIS_USERNAME}:${REDIS_PASSWORD}@localhost:6379"
+#  host: localhost
+#  port: 6379
+#  username: "${REDIS_USERNAME}"
+#  password: "${REDIS_PASSWORD}"

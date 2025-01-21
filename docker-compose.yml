@@ -1,0 +1,31 @@
+version: "3.9"  # Or a more recent version
+
+services:
+  redis:
+    image: redis:7.4-alpine # Using alpine image for smaller size, use 7.2.4 or latest 7.2.x if 7.4 is unavailable as alpine images often lag slightly
+    container_name: local-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data # Named volume for persistence
+    environment:
+      - REDIS_PASSWORD=mayonnaise9865 # Replace with a strong password
+      - REDIS_USERNAME=redisuser
+    command: redis-server --requirepass "$REDIS_PASSWORD" --user "$REDIS_USERNAME" --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru # Limiting memory
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5' # Limit CPU usage
+          memory: 512M # Limit memory usage for container, not redis itself.
+    security_opt:
+      - no-new-privileges:true
+    ulimits:
+      memlock: -1
+      nofile: 65536
+    cap_drop:
+      - NET_ADMIN
+      - SYS_ADMIN
+
+volumes:
+  redis_data:
