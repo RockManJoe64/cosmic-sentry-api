@@ -1,0 +1,17 @@
+#Tue Jan 21 07:27:32 PST 2025
+micronaut:
+  metrics:
+    enabled: true
+    export:
+      jmx:
+        enabled: true
+        step: PT1M
+  application:
+    name: cosmic-sentry
+graphql:
+  enabled: true
+  path: /graphql
+  graphiql: # enables the /graphiql endpoint to test calls against your graph.
+    enabled: true
+redis:
+  uri: redis\://localhost
