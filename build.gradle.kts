@@ -11,6 +11,7 @@ plugins {
 }
 
 val kotlinVersion = project.properties.get("kotlinVersion")
+val kotlinCoroutinesVersion = project.properties.get("kotlinCoroutinesVersion")
 val kotlinxDateTimeVersion = project.properties.get("kotlinxDateTimeVersion")
 val kotlinxSerializationVersion = project.properties.get("kotlinxSerializationVersion")
 val dotenvVersion = project.properties.get("dotenvVersion")
@@ -25,6 +26,7 @@ repositories {
 dependencies {
     ksp("io.micronaut:micronaut-http-validation")
     ksp("io.micronaut.serde:micronaut-serde-processor")
+    ksp("io.micronaut.validation:micronaut-validation-processor")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-management")
     implementation("io.micronaut.graphql:micronaut-graphql")
@@ -33,8 +35,11 @@ dependencies {
     implementation("io.micronaut.micrometer:micronaut-micrometer-registry-jmx")
     implementation("io.micronaut.redis:micronaut-redis-lettuce")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
+    implementation("io.micronaut.validation:micronaut-validation")
+    implementation("jakarta.validation:jakarta.validation-api")
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinCoroutinesVersion}")
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:${kotlinxDateTimeVersion}")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${kotlinxSerializationVersion}")
     implementation("io.github.cdimascio:dotenv-kotlin:${dotenvVersion}")
@@ -45,14 +50,12 @@ dependencies {
     testImplementation("io.micronaut:micronaut-http-client")
 }
 
-
 application {
     mainClass = "com.rangerforce.ApplicationKt"
 }
 java {
     sourceCompatibility = JavaVersion.toVersion("21")
 }
-
 
 graalvmNative.toolchainDetection = false
 micronaut {
@@ -76,9 +79,6 @@ micronaut {
     }
 }
 
-
 tasks.named<io.micronaut.gradle.docker.NativeImageDockerfile>("dockerfileNative") {
     jdkVersion = "21"
 }
-
-
