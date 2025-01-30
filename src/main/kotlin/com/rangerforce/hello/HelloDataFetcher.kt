@@ -1,4 +1,4 @@
-package com.rangerforce
+package com.rangerforce.hello
 
 import graphql.schema.DataFetcher
 import graphql.schema.DataFetchingEnvironment

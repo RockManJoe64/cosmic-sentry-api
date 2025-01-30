@@ -1,4 +1,4 @@
-package com.rangerforce
+package com.rangerforce.hello
 
 import graphql.GraphQL
 import graphql.schema.idl.RuntimeWiring
