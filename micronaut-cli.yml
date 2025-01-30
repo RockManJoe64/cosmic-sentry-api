@@ -3,4 +3,4 @@ defaultPackage: com.rangerforce
 testFramework: kotest
 sourceLanguage: kotlin
 buildTool: gradle_kotlin
-features: [app-name, graalvm, gradle, graphql, http-client-test, kotest, kotlin, kotlin-application, ksp, logback, management, micrometer, micrometer-jmx, micronaut-aot, micronaut-build, micronaut-http-validation, netty-server, properties, readme, redis-lettuce, serialization-jackson, shade, static-resources, yaml, yaml-build]
+features: [app-name, graalvm, gradle, graphql, http-client, http-client-test, kotest, kotlin, kotlin-application, ksp, logback, management, micrometer, micrometer-jmx, micronaut-aot, micronaut-build, micronaut-http-validation, netty-server, properties, readme, redis-lettuce, serialization-jackson, shade, static-resources, yaml, yaml-build]

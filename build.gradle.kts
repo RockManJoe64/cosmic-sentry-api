@@ -1,17 +1,22 @@
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.9.23"
-    id("org.jetbrains.kotlin.plugin.allopen") version "1.9.23"
-    id("com.google.devtools.ksp") version "1.9.23-1.0.19"
+    val kotlinVersion = "2.1.10"
+    val micronautVersion = "4.4.+"
+    id("org.jetbrains.kotlin.jvm") version kotlinVersion
+    id("org.jetbrains.kotlin.plugin.allopen") version kotlinVersion
+    id("com.google.devtools.ksp") version "${kotlinVersion}-1.0.29"
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("io.micronaut.application") version "4.4.0"
-    id("io.micronaut.aot") version "4.4.0"
+    id("io.micronaut.application") version micronautVersion
+    id("io.micronaut.aot") version micronautVersion
+    kotlin("plugin.serialization") version kotlinVersion
 }
+
+val kotlinVersion = project.properties.get("kotlinVersion")
+val kotlinxDateTimeVersion = project.properties.get("kotlinxDateTimeVersion")
+val kotlinxSerializationVersion = project.properties.get("kotlinxSerializationVersion")
+val dotenvVersion = project.properties.get("dotenvVersion")
 
 version = "0.1"
 group = "com.rangerforce"
-
-val kotlinVersion=project.properties.get("kotlinVersion")
-val dotenvVersion=project.properties.get("dotenvVersion")
 
 repositories {
     mavenCentral()
@@ -20,6 +25,7 @@ repositories {
 dependencies {
     ksp("io.micronaut:micronaut-http-validation")
     ksp("io.micronaut.serde:micronaut-serde-processor")
+    implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-management")
     implementation("io.micronaut.graphql:micronaut-graphql")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
@@ -29,6 +35,8 @@ dependencies {
     implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:${kotlinxDateTimeVersion}")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${kotlinxSerializationVersion}")
     implementation("io.github.cdimascio:dotenv-kotlin:${dotenvVersion}")
     compileOnly("io.micronaut:micronaut-http-client")
     runtimeOnly("ch.qos.logback:logback-classic")
