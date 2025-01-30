@@ -1,0 +1,40 @@
+package com.rangerforce.nasa
+
+import com.rangerforce.nasa.neows.NearEarthObject
+import com.rangerforce.nasa.neows.NeoWsFeedRequest
+import com.rangerforce.nasa.neows.NeoWsService
+import io.micronaut.http.HttpRequest
+import io.micronaut.http.HttpResponse
+import io.micronaut.http.MediaType
+import io.micronaut.http.annotation.*
+import io.micronaut.http.hateoas.JsonError
+import jakarta.validation.Valid
+import kotlinx.datetime.LocalDate
+import org.slf4j.LoggerFactory
+
+@Controller("/nasa")
+open class NasaApiController(
+    private val neoWsService: NeoWsService,
+    private val nasaApiConfiguration: NasaApiConfiguration
+) {
+    private val log = LoggerFactory.getLogger(NasaApiController::class.java)
+
+    @Post("/neows/feed")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    open suspend fun getNearEarthObjects(@Body @Valid request: NeoWsFeedRequest): List<NearEarthObject>? {
+        val startDate = LocalDate.parse(request.startDate)
+        val endDate = request.endDate?.let { LocalDate.parse(request.endDate) }
+        return neoWsService.fetchNearEarthObjects(startDate, endDate, nasaApiConfiguration.key)
+    }
+
+    @Error
+    fun error(request: HttpRequest<*>, e: Throwable): HttpResponse<JsonError> {
+        log.error("Something bad happened: ${e.message}", e)
+
+        val error = JsonError("An error occurred. Check the logs.")
+
+        return HttpResponse.serverError<JsonError>()
+            .body(error) // (3)
+    }
+}

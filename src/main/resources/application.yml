@@ -8,6 +8,10 @@ micronaut:
         step: PT1M
   application:
     name: cosmic-sentry
+  http:
+    services:
+      neows: # NASA Near Earth Object Web Service (NEOWS)
+        url: "https://api.nasa.gov"
 graphql:
   enabled: true
   path: /graphql
@@ -15,7 +19,8 @@ graphql:
     enabled: true
 redis:
   uri: "redis://${REDIS_USERNAME}:${REDIS_PASSWORD}@localhost:6379"
-#  host: localhost
-#  port: 6379
-#  username: "${REDIS_USERNAME}"
-#  password: "${REDIS_PASSWORD}"
+nasa:
+  api:
+    key: "${NASA_API_KEY}"
+    neows:
+      url-path: "/neo/rest/v1/feed"
