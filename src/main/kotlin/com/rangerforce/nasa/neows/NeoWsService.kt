@@ -1,5 +1,6 @@
 package com.rangerforce.nasa.neows
 
+import com.rangerforce.nasa.neows.data.NearEarthObject
 import jakarta.inject.Singleton
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.format

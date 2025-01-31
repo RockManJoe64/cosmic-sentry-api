@@ -1,5 +1,6 @@
 package com.rangerforce.nasa.neows
 
+import com.rangerforce.nasa.neows.data.NeoWsFeed
 import io.micronaut.core.async.annotation.SingleResult
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.client.annotation.Client
