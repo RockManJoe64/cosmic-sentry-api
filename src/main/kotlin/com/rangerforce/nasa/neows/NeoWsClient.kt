@@ -5,7 +5,6 @@ import io.micronaut.core.async.annotation.SingleResult
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.client.annotation.Client
 
-//@Client(id="neows", path="\${nasa.api.neows.base-url}")
 @Client("\${nasa.api.neows.base-url}")
 interface NeoWsClient {
 

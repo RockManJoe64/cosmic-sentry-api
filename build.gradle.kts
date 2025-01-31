@@ -1,13 +1,14 @@
 plugins {
     val kotlinVersion = "2.1.10"
     val micronautVersion = "4.4.+"
-    id("org.jetbrains.kotlin.jvm") version kotlinVersion
+    kotlin("jvm") version kotlinVersion
+    kotlin("plugin.serialization") version kotlinVersion
     id("org.jetbrains.kotlin.plugin.allopen") version kotlinVersion
+    id("org.jetbrains.kotlinx.kover") version "0.9.1"
     id("com.google.devtools.ksp") version "${kotlinVersion}-1.0.29"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("io.micronaut.application") version micronautVersion
     id("io.micronaut.aot") version micronautVersion
-    kotlin("plugin.serialization") version kotlinVersion
 }
 
 val kotlinVersion = project.properties.get("kotlinVersion")
@@ -53,6 +54,7 @@ dependencies {
 application {
     mainClass = "com.rangerforce.ApplicationKt"
 }
+
 java {
     sourceCompatibility = JavaVersion.toVersion("21")
 }
@@ -81,4 +83,30 @@ micronaut {
 
 tasks.named<io.micronaut.gradle.docker.NativeImageDockerfile>("dockerfileNative") {
     jdkVersion = "21"
+}
+
+kover {
+    reports {
+        filters {
+            excludes {
+                // exclusion rules - classes to exclude from report
+                classes(
+                    "com.rangerforce.nasa.neows.data.*",
+                    "com.rangerforce.nasa.neows.*Configuration",
+                    "com.rangerforce.nasa.neows.NeoWsException",
+                )
+            }
+        }
+        verify {
+            // add new verification rule
+            rule {
+                minBound(80)
+                // specify coverage bounds for the rule
+            }
+        }
+    }
+}
+
+tasks.named("koverHtmlReport") {
+    dependsOn(tasks.test)
 }

@@ -2,7 +2,7 @@ package com.rangerforce.nasa
 
 import com.rangerforce.nasa.neows.data.NearEarthObject
 import com.rangerforce.nasa.neows.NeoWsException
-import com.rangerforce.nasa.neows.NeoWsFeedRequest
+import com.rangerforce.nasa.neows.data.NeoWsFeedRequest
 import com.rangerforce.nasa.neows.NeoWsService
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
