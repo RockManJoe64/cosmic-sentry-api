@@ -17,6 +17,7 @@ class NasaApiConfiguration {
     // NASA Near Earth Object Web Service (NEOWS)
     @ConfigurationProperties("neows")
     class NeoWs {
-        var urlPath: String? = null
+        @setparam:NotBlank lateinit var baseUrl: String
+        @setparam:NotBlank lateinit var feedPath: String
     }
 }

@@ -19,9 +19,10 @@ open class NasaApiController(
 ) {
     private val log = LoggerFactory.getLogger(NasaApiController::class.java)
 
-    @Post("/neows/feed")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Post(
+        value="/neows/feed",
+        processes = [MediaType.APPLICATION_JSON]
+    )
     open suspend fun getNearEarthObjects(@Body @Valid request: NeoWsFeedRequest): List<NearEarthObject>? {
         val startDate = LocalDate.parse(request.startDate)
         val endDate = request.endDate?.let { LocalDate.parse(request.endDate) }

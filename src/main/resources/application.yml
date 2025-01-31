@@ -23,4 +23,5 @@ nasa:
   api:
     key: "${NASA_API_KEY}"
     neows:
-      url-path: "/neo/rest/v1/feed"
+      base-url: "https://api.nasa.gov"
+      feed-path: "/neo/rest/v1/feed"

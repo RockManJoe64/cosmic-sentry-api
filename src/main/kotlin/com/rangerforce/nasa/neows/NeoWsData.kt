@@ -1,15 +1,15 @@
 package com.rangerforce.nasa.neows
 
-import io.micronaut.serde.annotation.Serdeable.Serializable
+import io.micronaut.serde.annotation.Serdeable
 import kotlinx.serialization.SerialName
 
-@Serializable
+@Serdeable
 data class NeoWsFeed(
     val element_count: Int,
     val near_earth_objects: Map<String, List<NearEarthObject>>
 )
 
-@Serializable
+@Serdeable
 data class NearEarthObject(
     val links: Links,
     val id: String,
@@ -23,12 +23,12 @@ data class NearEarthObject(
     val is_sentry_object: Boolean
 )
 
-@Serializable
+@Serdeable
 data class Links(
     val self: String
 )
 
-@Serializable
+@Serdeable
 data class EstimatedDiameter(
     val kilometers: DiameterRange,
     val meters: DiameterRange,
@@ -36,13 +36,13 @@ data class EstimatedDiameter(
     val feet: DiameterRange
 )
 
-@Serializable
+@Serdeable
 data class DiameterRange(
     @SerialName("estimated_diameter_min")  val estimatedDiameterMin: Double,
     @SerialName("estimated_diameter_max") val estimatedDiameterMax: Double
 )
 
-@Serializable
+@Serdeable
 data class CloseApproachData(
     val close_approach_date: String,
     val close_approach_date_full: String,
@@ -52,14 +52,14 @@ data class CloseApproachData(
     val orbiting_body: String
 )
 
-@Serializable
+@Serdeable
 data class RelativeVelocity(
     val kilometers_per_second: String,
     val kilometers_per_hour: String,
     val miles_per_hour: String
 )
 
-@Serializable
+@Serdeable
 data class MissDistance(
     val astronomical: String,
     val lunar: String,
