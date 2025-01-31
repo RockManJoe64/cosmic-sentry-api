@@ -14,8 +14,7 @@ class NeoWsService(private val neoWsClient: NeoWsClient) {
             val response = neoWsClient.fetchFeed(startDateString, endDateString, apiKey)
             response.near_earth_objects.values.flatten()
         } catch (e: Exception) {
-            println("Error fetching NEO data: ${e.message}")
-            null
+            throw NeoWsException("Error fetching NEO WS feed: ${e.message}", e)
         }
     }
 }

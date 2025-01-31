@@ -1,6 +1,7 @@
 package com.rangerforce.nasa
 
 import com.rangerforce.nasa.neows.NearEarthObject
+import com.rangerforce.nasa.neows.NeoWsException
 import com.rangerforce.nasa.neows.NeoWsFeedRequest
 import com.rangerforce.nasa.neows.NeoWsService
 import io.micronaut.http.HttpRequest
@@ -27,6 +28,16 @@ open class NasaApiController(
         val startDate = LocalDate.parse(request.startDate)
         val endDate = request.endDate?.let { LocalDate.parse(request.endDate) }
         return neoWsService.fetchNearEarthObjects(startDate, endDate, nasaApiConfiguration.key)
+    }
+
+    @Error(NeoWsException::class)
+    fun neoWsError(request: HttpRequest<*>, e: NeoWsException): HttpResponse<JsonError> {
+        log.error("Error fetching data: ${e.message}", e)
+
+        val error = JsonError("Error fetching data from the Near Earth Object Web Service.")
+
+        return HttpResponse.serverError<JsonError>()
+            .body(error)
     }
 
     @Error
