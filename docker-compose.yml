@@ -8,10 +8,8 @@ services:
       - "6379:6379"
     volumes:
       - redis_data:/data # Named volume for persistence
-    environment:
-      - REDIS_PASSWORD=mayonnaise9865 # Replace with a strong password
-      - REDIS_USERNAME=redisuser
-    command: redis-server --requirepass "$REDIS_PASSWORD" --user "$REDIS_USERNAME" --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru # Limiting memory
+      - ./redis/redis.conf:/etc/redis/redis.conf
+    command: redis-server /etc/redis/redis.conf
     restart: unless-stopped
     deploy:
       resources:
