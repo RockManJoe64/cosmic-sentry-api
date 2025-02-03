@@ -26,7 +26,13 @@ open class NasaApiController(
     )
     open suspend fun getNearEarthObjects(@Body @Valid request: NeoWsFeedRequest): List<NearEarthObject>? {
         val startDate = LocalDate.parse(request.startDate)
-        val endDate = request.endDate?.let { LocalDate.parse(request.endDate) }
+        val endDate = request.endDate?.let {
+            if (it.isBlank()) {
+                null
+            } else {
+                LocalDate.parse(it)
+            }
+        }
         return neoWsService.fetchNearEarthObjects(startDate, endDate, nasaApiConfiguration.key)
     }
 

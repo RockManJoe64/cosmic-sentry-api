@@ -91,8 +91,10 @@ kover {
             excludes {
                 // exclusion rules - classes to exclude from report
                 classes(
+                    "*.*Configuration*",
+                    "com.rangerforce.ApplicationKt",
+                    "com.rangerforce.hello.*",
                     "com.rangerforce.nasa.neows.data.*",
-                    "com.rangerforce.nasa.neows.*Configuration",
                     "com.rangerforce.nasa.neows.NeoWsException",
                 )
             }
