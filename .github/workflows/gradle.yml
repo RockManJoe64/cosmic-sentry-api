@@ -40,7 +40,7 @@ jobs:
       run: ./gradlew test
 
     - name: Publish Test Report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: test-report
@@ -50,7 +50,7 @@ jobs:
       run: ./gradlew koverVerify koverXmlReport koverHtmlReport
 
     - name: Publish Kover HTML report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: kover-report
         path: build/reports/kover/html
