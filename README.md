@@ -1,5 +1,9 @@
 # cosmic-sentry-api
-A Kotlin-based GraphQL backend application that aggregates NASA data for near earth objects. 
+
+![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)
+![Micronaut](https://img.shields.io/badge/Micronaut-376B9B?style=for-the-badge&logo=microeditor&logoColor=white)
+
+A Kotlin-based REST backend application that aggregates NASA data for near earth objects. 
 Using Micronaut as the service framework.
 
 ## Setting up Redis
